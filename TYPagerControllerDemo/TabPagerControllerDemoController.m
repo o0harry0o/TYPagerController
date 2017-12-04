@@ -12,6 +12,9 @@
 #import "CollectionViewController.h"
 
 @interface TabPagerControllerDemoController ()<TYTabPagerControllerDataSource,TYTabPagerControllerDelegate>
+{
+    int numPage;
+}
 
 @property (nonatomic, strong) NSArray *datas;
 
@@ -37,7 +40,8 @@
 
 - (void)loadData {
     NSMutableArray *datas = [NSMutableArray array];
-    for (NSInteger i = 0; i < 3; ++i) {
+    numPage = 10;
+    for (NSInteger i = 0; i < numPage; ++i) {
         [datas addObject:i%2 == 0 ? [NSString stringWithFormat:@"Tab %ld",i]:[NSString stringWithFormat:@"Tab Tab %ld",i]];
     }
     _datas = [datas copy];
@@ -53,11 +57,11 @@
 }
 
 - (UIViewController *)tabPagerController:(TYTabPagerController *)tabPagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
-    if (index%3 == 0) {
+    if (index%numPage%3 == 0) {
         CustomViewController *VC = [[CustomViewController alloc]init];
         VC.text = [@(index) stringValue];
         return VC;
-    }else if (index%3 == 1) {
+    }else if (index%numPage%3 == 1) {
         ListViewController *VC = [[ListViewController alloc]init];
         VC.text = [@(index) stringValue];
         return VC;
@@ -69,6 +73,7 @@
 }
 
 - (NSString *)tabPagerController:(TYTabPagerController *)tabPagerController titleForIndex:(NSInteger)index {
+    index = index%numPage;
     NSString *title = _datas[index];
     return title;
 }
