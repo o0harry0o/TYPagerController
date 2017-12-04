@@ -44,7 +44,7 @@
 }
 
 - (void)addTabBar {
-    TYTabPagerBar *tabBar = [[TYTabPagerBar alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), _tabBarHeight)];
+    TYTabPagerBar *tabBar = [[TYTabPagerBar alloc]initWithFrame:CGRectMake(0, MAX(CGRectGetHeight(self.frame) - _tabBarHeight, 0), CGRectGetWidth(self.frame), _tabBarHeight)];
     tabBar.dataSource = self;
     tabBar.delegate = self;
     [self addSubview:tabBar];
@@ -53,7 +53,7 @@
 }
 
 - (void)addPagerView {
-    TYPagerView *pageView = [[TYPagerView alloc]initWithFrame:CGRectMake(0, _tabBarHeight, CGRectGetWidth(self.frame), MAX(CGRectGetHeight(self.frame) - _tabBarHeight, 0))];
+    TYPagerView *pageView = [[TYPagerView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), MAX(CGRectGetHeight(self.frame) - _tabBarHeight, 0))];
     pageView.dataSource = self;
     pageView.delegate = self;
     [self addSubview:pageView];
@@ -187,8 +187,8 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _tabBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), _tabBarHeight);
-    _pageView.frame = CGRectMake(0, _tabBarHeight, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - _tabBarHeight);
+    _tabBar.frame = CGRectMake(0, MAX(CGRectGetHeight(self.frame) - _tabBarHeight, 0), CGRectGetWidth(self.frame), _tabBarHeight);
+    _pageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - _tabBarHeight);
 }
 
 @end

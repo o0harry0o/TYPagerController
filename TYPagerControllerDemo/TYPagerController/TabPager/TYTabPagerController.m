@@ -66,8 +66,8 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     CGFloat orignY = [self fixedTabBarOriginY];
-    self.tabBar.frame = CGRectMake(0, orignY, CGRectGetWidth(self.view.frame), _tabBarHeight);
-    self.pagerController.view.frame = CGRectMake(0, orignY+_tabBarHeight, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - _tabBarHeight-orignY);
+    self.tabBar.frame = CGRectMake(0, CGRectGetHeight(self.view.frame)+0-_tabBarHeight, CGRectGetWidth(self.view.frame), _tabBarHeight);
+    self.pagerController.view.frame = CGRectMake(0, orignY, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - _tabBarHeight-orignY);
 }
 
 - (CGFloat)fixedTabBarOriginY {
