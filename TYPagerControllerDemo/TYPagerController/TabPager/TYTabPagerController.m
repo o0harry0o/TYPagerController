@@ -9,6 +9,9 @@
 #import "TYTabPagerController.h"
 
 @interface TYTabPagerController ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate>
+{
+    BOOL oriStatusBar;
+}
 
 // UI
 @property (nonatomic, strong) TYTabPagerBar *tabBar;
@@ -43,12 +46,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-
+    oriStatusBar = [UIApplication sharedApplication].statusBarHidden;
     [self addTabBar];
     
     [self addPagerController];
 }
-
+- (void)dealloc
+{
+    [UIApplication sharedApplication].statusBarHidden = oriStatusBar;
+}
 - (void)addTabBar {
     self.tabBar.dataSource = self;
     self.tabBar.delegate = self;
@@ -220,5 +226,31 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)expandScreen:(BOOL)expand
+{
+    if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice.orientation))
+    {
+        _isFullScreen=expand;
+        [[UIApplication sharedApplication] setStatusBarHidden:expand];
+    }
+}
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice.orientation))
+         {
+             [[UIApplication sharedApplication] setStatusBarHidden:oriStatusBar];
+         }
+         else
+         {
+             [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
+         }
+     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     {
+         
+     }];
+    
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+}
 @end

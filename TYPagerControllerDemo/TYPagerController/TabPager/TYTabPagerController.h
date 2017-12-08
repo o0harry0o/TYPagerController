@@ -50,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 // you can custom tabBar orignY and height.
 @property (nonatomic, assign) CGFloat tabBarOrignY;
 @property (nonatomic, assign) CGFloat tabBarHeight;
+@property (nonatomic, assign) BOOL isFullScreen;
+- (void)expandScreen:(BOOL)expand;
 
 // register tabBar cell
 - (void)registerClass:(Class)Class forTabBarCellWithReuseIdentifier:(NSString *)identifier;
