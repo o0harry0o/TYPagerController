@@ -82,7 +82,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)tabPagerControllerDidEndScrolling:(TYTabPagerController *)tabPagerController animate:(BOOL)animate
+{
+    [self expandScreen:rand()%2];
+}
 /*
 #pragma mark - Navigation
 

@@ -73,7 +73,8 @@
     [super viewWillLayoutSubviews];
     CGFloat orignY = [self fixedTabBarOriginY];
     self.tabBar.frame = CGRectMake(0, CGRectGetHeight(self.view.frame)+0-_tabBarHeight, CGRectGetWidth(self.view.frame), _tabBarHeight);
-    self.pagerController.view.frame = CGRectMake(0, orignY, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - _tabBarHeight-orignY);
+    float pageHeight = _isFullScreen?0:_tabBarHeight;
+    self.pagerController.view.frame = CGRectMake(0, orignY, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - pageHeight-orignY);
 }
 
 - (CGFloat)fixedTabBarOriginY {
@@ -232,6 +233,15 @@
     {
         _isFullScreen=expand;
         [[UIApplication sharedApplication] setStatusBarHidden:expand];
+        if(_isFullScreen)
+        {
+            [_tabBar removeFromSuperview];
+        }
+        else
+        {
+            [self.view addSubview:_tabBar];
+        }
+        [self.view setNeedsLayout];
     }
 }
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
