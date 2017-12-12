@@ -232,7 +232,8 @@
 }
 - (void)expandScreen:(BOOL)expand
 {
-    if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice.orientation))
+    UIDeviceOrientation orientation = (UIDeviceOrientation)[[UIApplication sharedApplication] statusBarOrientation];
+    if(UIDeviceOrientationIsLandscape(orientation))
     {
         _isFullScreen=expand;
         [[UIApplication sharedApplication] setStatusBarHidden:expand];
@@ -252,7 +253,8 @@
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-         if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice.orientation))
+         UIDeviceOrientation orientation = (UIDeviceOrientation)[[UIApplication sharedApplication] statusBarOrientation];
+         if(UIDeviceOrientationIsPortrait(orientation))
          {
              [[UIApplication sharedApplication] setStatusBarHidden:oriStatusBar];
              self.navigationController.navigationBar.hidden=isNavHidden;
