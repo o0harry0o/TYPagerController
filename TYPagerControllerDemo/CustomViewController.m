@@ -8,7 +8,7 @@
 
 #import "CustomViewController.h"
 #import "PagerControllerDmeoController.h"
-
+#import "AppDelegate.h"
 @interface CustomViewController ()
 @property (nonatomic, weak) UILabel *label;
 @property (nonatomic, weak) UIButton *pushBtn;
@@ -101,7 +101,8 @@
 
 - (void)popBack
 {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [APP_DELEGATE.tabDemo expandScreen:rand()%2];
 }
 
 - (void)didReceiveMemoryWarning {

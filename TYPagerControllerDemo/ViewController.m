@@ -11,7 +11,7 @@
 #import "PagerControllerDmeoController.h"
 #import "TabPagerControllerDemoController.h"
 #import "TabPagerViewDmeoController.h"
-
+#import "AppDelegate.h"
 @interface ViewController ()
 
 @end
@@ -44,6 +44,7 @@
 - (IBAction)turnToTabPagerControllerDemo:(id)sender {
     TabPagerControllerDemoController *pagerController = [[TabPagerControllerDemoController alloc]init];
     //pagerController.pagerController.layout.prefetchItemCount = 1;
+    APP_DELEGATE.tabDemo = pagerController;
     [self.navigationController pushViewController:pagerController animated:YES];
 }
 - (void)didReceiveMemoryWarning {
