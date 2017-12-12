@@ -251,10 +251,20 @@
          if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice.orientation))
          {
              [[UIApplication sharedApplication] setStatusBarHidden:oriStatusBar];
+             if(_isFullScreen)
+             {
+                 [self.view addSubview:_tabBar];
+                 [self.view setNeedsLayout];
+             }
          }
          else
          {
              [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
+             if(_isFullScreen)
+             {
+                 [_tabBar removeFromSuperview];
+                 [self.view setNeedsLayout];
+             }
          }
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
