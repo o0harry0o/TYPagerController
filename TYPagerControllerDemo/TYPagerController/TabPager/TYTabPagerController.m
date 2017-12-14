@@ -272,7 +272,7 @@
          }
          else
          {
-             [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
+//             [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
              self.navigationController.navigationBar.hidden=_isFullScreen;
              if(_isFullScreen)
              {
