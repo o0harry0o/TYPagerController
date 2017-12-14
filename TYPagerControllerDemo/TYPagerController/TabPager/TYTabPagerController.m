@@ -76,8 +76,9 @@
     CGFloat orignY = [self fixedTabBarOriginY];
     self.tabBar.frame = CGRectMake(0, CGRectGetHeight(self.view.frame)+0-_tabBarHeight, CGRectGetWidth(self.view.frame), _tabBarHeight);
     float pageHeight = _isFullScreen?0:_tabBarHeight;
-    float pageY = _isFullScreen?0:orignY;
-    self.pagerController.view.frame = CGRectMake(0, pageY, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - pageHeight-orignY);
+    orignY = _isFullScreen?0:orignY;
+    
+    self.pagerController.view.frame = CGRectMake(0, orignY, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - pageHeight-orignY);
 }
 
 - (CGFloat)fixedTabBarOriginY {
@@ -236,7 +237,7 @@
     if(UIDeviceOrientationIsLandscape(orientation))
     {
         _isFullScreen=expand;
-        [[UIApplication sharedApplication] setStatusBarHidden:expand];
+        //[[UIApplication sharedApplication] setStatusBarHidden:expand];
         self.navigationController.navigationBar.hidden=_isFullScreen;
         if(_isFullScreen)
         {
