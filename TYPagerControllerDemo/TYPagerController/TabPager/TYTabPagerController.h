@@ -65,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)scrollToControllerAtIndex:(NSInteger)index animate:(BOOL)animate;
 
+- (void)willChangeToLandscape:(BOOL)isLandscape;
+
 - (void)updateData;
 
 - (void)reloadData;

@@ -249,6 +249,10 @@
         [self.view setNeedsLayout];
     }
 }
+- (void)willChangeToLandscape:(BOOL)isLandscape
+{
+    
+}
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
@@ -263,6 +267,7 @@
                  [self.view addSubview:_tabBar];
                  [self.view setNeedsLayout];
              }
+             [self willChangeToLandscape:NO];
          }
          else
          {
@@ -273,6 +278,7 @@
                  [_tabBar removeFromSuperview];
                  [self.view setNeedsLayout];
              }
+             [self willChangeToLandscape:YES];
          }
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
