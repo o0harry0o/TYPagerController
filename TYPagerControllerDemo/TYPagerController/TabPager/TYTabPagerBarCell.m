@@ -10,6 +10,7 @@
 
 @interface TYTabPagerBarCell ()
 @property (nonatomic, weak) UILabel *titleLabel;
+@property (nonatomic, weak) UIImageView *imageViewIcon;
 @end
 
 @implementation TYTabPagerBarCell
@@ -18,6 +19,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         [self addTabTitleLabel];
+        [self addImageIcon];
     }
     return self;
 }
@@ -39,6 +41,13 @@
     [self.contentView addSubview:titleLabel];
     _titleLabel = titleLabel;
 }
+- (void)addImageIcon
+{
+    UIImageView* imageView = [[UIImageView alloc] init];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.contentView addSubview:imageView];
+    _imageViewIcon = imageView;
+}
 
 + (NSString *)cellIdentifier {
     return @"TYTabPagerBarCell";
@@ -48,6 +57,7 @@
 {
     [super layoutSubviews];
     _titleLabel.frame = self.contentView.bounds;
+    _imageViewIcon.frame = self.contentView.bounds;
 }
 
 @end

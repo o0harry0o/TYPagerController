@@ -14,11 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
  font ,textColor will use TYTabPagerBarLayout's textFont,textColor
  */
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
+@property (nonatomic, strong, readonly) UIImageView *imageViewIcon;
 
 @end
 
 @interface TYTabPagerBarCell : UICollectionViewCell<TYTabPagerBarCellProtocol>
 @property (nonatomic, weak,readonly) UILabel *titleLabel;
+@property (nonatomic, weak,readonly) UIImageView *imageViewIcon;
 
 + (NSString *)cellIdentifier;
 @end
