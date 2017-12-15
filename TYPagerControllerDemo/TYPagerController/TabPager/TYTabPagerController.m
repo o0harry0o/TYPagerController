@@ -73,12 +73,22 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    CGFloat orignY = [self fixedTabBarOriginY];
     self.tabBar.frame = CGRectMake(0, CGRectGetHeight(self.view.frame)+0-_tabBarHeight, CGRectGetWidth(self.view.frame), _tabBarHeight);
-    float pageHeight = _isFullScreen?0:_tabBarHeight;
-    orignY = _isFullScreen?0:orignY;
-    
-    self.pagerController.view.frame = CGRectMake(0, orignY, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - pageHeight-orignY);
+    CGFloat orignY = [self fixedTabBarOriginY];
+    if(_isFullScreen)
+    {
+        self.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight([UIScreen mainScreen].bounds)+20);
+        self.pagerController.view.frame = CGRectMake(0, -20, CGRectGetWidth(self.view.frame), CGRectGetHeight([UIScreen mainScreen].bounds)+20);
+    }
+    else
+    {
+        UIDeviceOrientation orientation = (UIDeviceOrientation)[[UIApplication sharedApplication] statusBarOrientation];
+        if(UIDeviceOrientationIsLandscape(orientation))
+        {
+            self.tabBar.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds)-_tabBarHeight, CGRectGetWidth(self.view.frame), _tabBarHeight);
+        }
+        self.pagerController.view.frame = CGRectMake(0, orignY, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - _tabBarHeight-orignY);
+    }
 }
 
 - (CGFloat)fixedTabBarOriginY {
@@ -238,7 +248,7 @@
     {
         _isFullScreen=expand;
         //[[UIApplication sharedApplication] setStatusBarHidden:expand];
-        self.navigationController.navigationBar.hidden=_isFullScreen;
+        self.navigationController.navigationBar.hidden=YES;
         if(_isFullScreen)
         {
             [_tabBar removeFromSuperview];
@@ -265,6 +275,7 @@
              self.navigationController.navigationBar.hidden=isNavHidden;
              if(_isFullScreen)
              {
+                 _isFullScreen = NO;
                  [self.view addSubview:_tabBar];
                  [self.view setNeedsLayout];
              }
@@ -272,8 +283,8 @@
          }
          else
          {
-//             [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
-             self.navigationController.navigationBar.hidden=_isFullScreen;
+             [[UIApplication sharedApplication] setStatusBarHidden:_isFullScreen];
+             self.navigationController.navigationBar.hidden=YES;
              if(_isFullScreen)
              {
                  [_tabBar removeFromSuperview];
