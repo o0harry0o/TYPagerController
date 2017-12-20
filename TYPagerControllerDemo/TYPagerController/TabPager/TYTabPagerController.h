@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat tabBarOrignY;
 @property (nonatomic, assign) CGFloat tabBarHeight;
 @property (nonatomic, assign) BOOL isFullScreen;
+@property (nonatomic, assign) BOOL enableScrollTab;
 - (void)expandScreen:(BOOL)expand;
 
 // register tabBar cell

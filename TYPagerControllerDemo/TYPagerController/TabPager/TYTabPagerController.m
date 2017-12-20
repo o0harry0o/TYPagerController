@@ -85,7 +85,16 @@
         UIDeviceOrientation orientation = (UIDeviceOrientation)[[UIApplication sharedApplication] statusBarOrientation];
         if(UIDeviceOrientationIsLandscape(orientation))
         {
-            self.tabBar.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds)-_tabBarHeight, CGRectGetWidth(self.view.frame), _tabBarHeight);
+            float width = CGRectGetWidth(self.view.frame)>CGRectGetHeight(self.view.frame)?CGRectGetHeight(self.view.frame):CGRectGetWidth(self.view.frame);
+            if(!_enableScrollTab)
+            {
+                self.tabBar.frame = CGRectMake((CGRectGetWidth(self.view.frame)-width)/2, CGRectGetHeight([UIScreen mainScreen].bounds)-_tabBarHeight, width, _tabBarHeight);
+            }
+            else
+            {
+                self.tabBar.frame = CGRectMake(0, CGRectGetHeight([UIScreen mainScreen].bounds)-_tabBarHeight, CGRectGetWidth(self.view.frame), _tabBarHeight);
+            }
+            
         }
         self.pagerController.view.frame = CGRectMake(0, orignY, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - _tabBarHeight-orignY);
     }
