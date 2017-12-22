@@ -71,6 +71,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _layout.scrollView.frame = UIEdgeInsetsInsetRect(self.view.bounds,_contentInset);
+    [self.navigationController.navigationBar setBackgroundImage:[TYPagerController imageWithColor:[UIColor blackColor]]  forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)viewWillLayoutSubviews
@@ -266,6 +267,20 @@
 - (void)dealloc
 {
     _layout = nil;
+}
+
++ (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 @end
